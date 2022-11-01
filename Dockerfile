@@ -1,4 +1,4 @@
-FROM golang:1.16 as builder
+FROM golang:1.17 as builder
 
 MAINTAINER wanghao<shalldows@163.com>
 
