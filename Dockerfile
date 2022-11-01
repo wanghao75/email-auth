@@ -10,7 +10,7 @@ WORKDIR $GOPATH/src/email-auth
 # 将当前目录同步到docker工作目录下
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main.go .
 
 FROM scratch
 
