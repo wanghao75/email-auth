@@ -8,7 +8,7 @@ import (
 func InitConfig() {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./conf")
+	viper.AddConfigPath("/go/src/email-auth/conf")
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("err is %v", err)
