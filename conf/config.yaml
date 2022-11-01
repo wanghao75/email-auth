@@ -1,16 +1,16 @@
 server:
   port: 8080
 datasource:
-  driverName: mysql
-  host: 127.0.0.1
-  port: "3306"
-  database: email
-  username: root
+  driverName:
+  host:
+  port:
+  database:
+  username:
   password:
-  charset: utf8
-  loc: Asia/Shanghai
+  charset:
+  loc:
 email:
-  host: smtp.163.com
-  port: 25
+  host:
+  port:
   secret:
-  user: shalldows@163.com
+  user: 

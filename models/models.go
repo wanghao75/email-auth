@@ -29,18 +29,40 @@ var DB *gorm.DB
 var err error
 
 func InitDB() {
-	// dbServer := viper.GetString("datasource.driverName")
 	dataBase := viper.GetString("datasource.database")
+	if dataBase == "" {
+		dataBase = os.Getenv("DB_NAME")
+	}
+
 	host := viper.GetString("datasource.host")
+	if host == "" {
+		host = os.Getenv("DB_HOST")
+	}
+
 	port := viper.GetString("datasource.port")
+	if port == "" {
+		port = os.Getenv("DB_PORT")
+	}
+
 	userName := viper.GetString("datasource.username")
+	if userName == "" {
+		userName = os.Getenv("DB_USER")
+	}
+
 	password := viper.GetString("datasource.password")
 	if password == "" {
 		password = os.Getenv("DB_PASSWORD")
 	}
-	// password := os.Getenv("DB_PASSWORD")
+
 	charset := viper.GetString("datasource.charset")
+	if charset == "" {
+		charset = os.Getenv("DB_CHARSET")
+	}
+
 	loc := viper.GetString("datasource.loc")
+	if charset == "" {
+		charset = os.Getenv("DB_LOC")
+	}
 
 	addr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=%s",
 		userName, password, host, port, dataBase, charset, strings.Replace(loc, "/", "%2F", 1))

@@ -158,8 +158,17 @@ func ReSendCode(c *gin.Context) {
 
 func sendEmailCode(code, emailAddress string) error {
 	host := viper.GetString("email.host")
+	if host == "" {
+		host = os.Getenv("EMAIL_HOST")
+	}
 	port := viper.GetString("email.port")
+	if port == "" {
+		port = os.Getenv("EMAIL_PORT")
+	}
 	us := viper.GetString("email.user")
+	if us == "" {
+		us = os.Getenv("EMAIL_HOST_USER")
+	}
 	secret := viper.GetString("email.secret")
 	if secret == "" {
 		secret = os.Getenv("EMAIL_HOST_PASSWORD")
