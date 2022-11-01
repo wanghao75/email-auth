@@ -4,7 +4,6 @@ import (
 	"email-auth/models"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"math/rand"
 	"net/http"
@@ -157,22 +156,29 @@ func ReSendCode(c *gin.Context) {
 }
 
 func sendEmailCode(code, emailAddress string) error {
-	host := viper.GetString("email.host")
-	if host == "" {
-		host = os.Getenv("EMAIL_HOST")
-	}
-	port := viper.GetString("email.port")
-	if port == "" {
-		port = os.Getenv("EMAIL_PORT")
-	}
-	us := viper.GetString("email.user")
-	if us == "" {
-		us = os.Getenv("EMAIL_HOST_USER")
-	}
-	secret := viper.GetString("email.secret")
-	if secret == "" {
-		secret = os.Getenv("EMAIL_HOST_PASSWORD")
-	}
+	//host := viper.GetString("email.host")
+	//if host == "" {
+	//	host = os.Getenv("EMAIL_HOST")
+	//}
+	host := os.Getenv("EMAIL_HOST")
+
+	//port := viper.GetString("email.port")
+	//if port == "" {
+	//	port = os.Getenv("EMAIL_PORT")
+	//}
+	port := os.Getenv("EMAIL_PORT")
+
+	//us := viper.GetString("email.user")
+	//if us == "" {
+	//	us = os.Getenv("EMAIL_HOST_USER")
+	//}
+	us := os.Getenv("EMAIL_HOST_USER")
+
+	//secret := viper.GetString("email.secret")
+	//if secret == "" {
+	//	secret = os.Getenv("EMAIL_HOST_PASSWORD")
+	//}
+	secret := os.Getenv("EMAIL_HOST_PASSWORD")
 
 	auth := smtp.PlainAuth("", us, secret, host)
 	contentType := "Content-Type: text/html; charset=UTF-8"

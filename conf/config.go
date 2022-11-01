@@ -12,6 +12,6 @@ func InitConfig() {
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("err is %v", err)
-		panic("init config err")
+		// panic("init config err")
 	}
 }
