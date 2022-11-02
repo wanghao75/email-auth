@@ -6,7 +6,13 @@ ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct
 WORKDIR $GOPATH/src/email-auth
 
-RUN apk add ca-certificates && apk add tzdata
+RUN apk add --no-cache ca-certificates \
+    tzdata \
+    bash \
+    bash-doc \
+    bash-completion \
+    && rm -rf /var/cache/apk/* \
+    && update-ca-certificates
 
 # 将当前目录同步到docker工作目录下
 COPY . .
@@ -24,6 +30,9 @@ WORKDIR /DockerTest
 COPY --from=builder /go/src/email-auth/main .
 
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
+
+COPY --from=builder /usr/share/ca-certificates /usr/share/ca-certificates
+COPY --from=builder /usr/local/share/ca-certificates /usr/local/share/ca-certificates
 ENV TZ=Asia/Shanghai
 
 EXPOSE 8080
