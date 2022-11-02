@@ -1,4 +1,4 @@
-FROM golang:alpine as builder
+FROM golang:1.17 as builder
 
 MAINTAINER wanghao<shalldows@163.com>
 
