@@ -1,4 +1,4 @@
-FROM golang:1.17 as builder
+FROM golang:alpine as builder
 
 MAINTAINER wanghao<shalldows@163.com>
 
@@ -6,7 +6,7 @@ ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct
 WORKDIR $GOPATH/src/email-auth
 
-RUN apk add ca-certificates
+RUN apk add ca-certificates && apk add tzdata
 
 # 将当前目录同步到docker工作目录下
 COPY . .
