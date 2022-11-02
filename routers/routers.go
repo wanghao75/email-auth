@@ -2,6 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	"os"
 	"time"
 
 	"email-auth/controllers"
@@ -10,6 +11,7 @@ import (
 
 func RouterEmailHelper() *gin.Engine {
 	r := gin.Default()
+	gin.SetMode(os.Getenv("GIN_MOD"))
 
 	r.Use(middleware.RateLimitMiddleware(time.Second, 5, 5))
 
