@@ -22,6 +22,9 @@ WORKDIR /DockerTest
 
 COPY --from=builder /go/src/email-auth/main .
 
+COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
+ENV TZ=Asia/Shanghai
+
 EXPOSE 8080
 
 ENTRYPOINT ["./main"]
