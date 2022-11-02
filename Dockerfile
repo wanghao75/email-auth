@@ -4,7 +4,7 @@ MAINTAINER wanghao<shalldows@163.com>
 
 ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct
-
+RUN apt-get install -y ca-certificates
 WORKDIR $GOPATH/src/email-auth
 
 # 将当前目录同步到docker工作目录下
@@ -15,7 +15,6 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 FROM scratch
 
 MAINTAINER wanghao<shalldows@163.com>
-RUN apt-get install -y ca-certificates
 
 ENV GIN_MOD=release
 
