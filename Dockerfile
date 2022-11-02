@@ -6,6 +6,8 @@ ENV GO111MODULE=on \
     GOPROXY=https://goproxy.cn,direct
 WORKDIR $GOPATH/src/email-auth
 
+RUN apk add ca-certificates
+
 # 将当前目录同步到docker工作目录下
 COPY . .
 
@@ -16,7 +18,6 @@ FROM scratch
 MAINTAINER wanghao<shalldows@163.com>
 
 ENV GIN_MOD=release
-RUN apk add ca-certificates
 
 WORKDIR /DockerTest
 
