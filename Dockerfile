@@ -31,7 +31,7 @@ COPY --from=builder /go/src/email-auth/main .
 
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 
-RUN apt-get install -y curl
+RUN apt install -y curl
 
 ENV TZ=Asia/Shanghai
 
