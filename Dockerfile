@@ -31,8 +31,6 @@ COPY --from=builder /go/src/email-auth/main .
 
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 
-RUN apt install -y curl
-
 ENV TZ=Asia/Shanghai
 
 EXPOSE 8080
