@@ -264,8 +264,7 @@ func GetAuthCode(c *gin.Context) {
 func GetResource(c *gin.Context) {
 	G := Gin{C: c}
 	t := c.Query("token")
-	fmt.Println("token is ", t)
-
+	
 	var us models.UserEmail
 	if err := models.DB.Where("token = ?", t).First(&us).Error; err != nil {
 		G.Response(http.StatusNotFound, "can not find record", map[string]interface{}{})
@@ -274,7 +273,7 @@ func GetResource(c *gin.Context) {
 
 	n := time.Now().Unix()
 	expiry := us.TokenGetTime + us.TokenExpiry
-	fmt.Println("++++++++++++++++++++++++++++", t, n, expiry, us.TokenGetTime, us.TokenExpiry)
+
 	if n > expiry {
 		G.Response(http.StatusForbidden, "token not match", map[string]interface{}{})
 		return
@@ -343,8 +342,7 @@ func GetTokenByCode(c *gin.Context) {
 	}
 
 	t := time.Now().Unix()
-	err := models.DB.Model(&models.UserEmail{}).Where("email = ?", u.Email).Update("token_get_time", t).Error
-	fmt.Println(err)
+	models.DB.Model(&models.UserEmail{}).Where("email = ?", u.Email).Update("token_get_time", t)
 
 	G.Response(http.StatusOK, "get token success", map[string]interface{}{
 		"redirect_uri":  redirectUri,
@@ -359,6 +357,5 @@ func GetTokenByCode(c *gin.Context) {
 func VerifyEmailFormat(email string) bool {
 	pattern := `\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*`
 	reg := regexp.MustCompile(pattern)
-	fmt.Println("email match == ", reg.MatchString(email))
 	return reg.MatchString(email)
 }
