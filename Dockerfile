@@ -1,4 +1,4 @@
-FROM golang:1.17 as builder
+FROM golang:alpine as builder
 
 MAINTAINER wanghao<shalldows@163.com>
 
@@ -15,7 +15,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 FROM scratch
 
 MAINTAINER wanghao<shalldows@163.com>
-RUN apt install -y ca-certificates
+RUN apt-get install -y ca-certificates
 
 ENV GIN_MOD=release
 
