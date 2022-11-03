@@ -4,6 +4,7 @@ import (
 	"email-auth/controllers"
 	"email-auth/models"
 	"github.com/robfig/cron/v3"
+	"time"
 )
 
 func Job(c *cron.Cron) {
@@ -12,6 +13,12 @@ func Job(c *cron.Cron) {
 		models.DB.Find(&users)
 
 		for _, u := range users {
+			now := time.Now().Unix()
+			update := u.UpdatedAt.Unix()
+
+			if update+300 > now {
+				continue
+			}
 			code := controllers.RandNumString()
 			u.UpdateCode(code)
 		}
