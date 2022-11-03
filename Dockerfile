@@ -25,7 +25,10 @@ MAINTAINER wanghao<shalldows@163.com>
 
 ENV GIN_MOD=release
 
-WORKDIR /DockerTest
+WORKDIR /DockerEmail
+
+RUN set -e \
+    && apt-get install -y ca-certificates
 
 COPY --from=builder /go/src/email-auth/main .
 
