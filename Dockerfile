@@ -19,7 +19,7 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 
-FROM ubuntu:20.04
+FROM ubuntu:20.04 as prod
 
 MAINTAINER wanghao<shalldows@163.com>
 
@@ -27,8 +27,7 @@ ENV GIN_MOD=release
 
 WORKDIR /DockerEmail
 
-RUN set -e \
-    && apt-get install -y ca-certificates
+RUN apt-get install -y ca-certificates
 
 COPY --from=builder /go/src/email-auth/main .
 
