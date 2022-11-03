@@ -27,7 +27,9 @@ ENV GIN_MOD=release
 
 WORKDIR /DockerEmail
 
-RUN apt-get install -y ca-certificates
+RUN apt-get update \
+    && apt-get install -y ca-certificates \
+    && update-ca-certificates
 
 COPY --from=builder /go/src/email-auth/main .
 
